@@ -15,4 +15,3 @@ build/
 *.log
 /src/main/java/GetDate.java
 src/test/java/LoginRyanair.java
-Jenkinsfile
