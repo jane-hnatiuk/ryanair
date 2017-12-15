@@ -43,60 +43,52 @@ public class Booking {
 
     public Booking selectFlightConnectionTime() throws InterruptedException {
         url().equals(bookingUrl);
-        this.flightTitle.waitUntil(visible, 6000);
-        this.flightBanner.waitUntil(visible, 6000);
-        this.flightTable.waitUntil(visible, 6000);
-        this.btnFirstAvailableFlightPrice.waitUntil(visible, 6000);
-        this.btnFirstAvailableFlightPrice.click();
+        flightTitle.waitUntil(visible, 6000);
+        flightBanner.waitUntil(visible, 6000);
+        flightTable.waitUntil(visible, 6000);
+        btnFirstAvailableFlightPrice.waitUntil(visible, 6000).click();
         return this;
     }
 
     public Booking selectFlightFlexiPlusFarePrice() {
-        this.flexiPlusFare.waitUntil(visible, 6000);
-        this.flexiPlusFare.scrollTo();
-        this.flexiPlusFare.shouldBe(clickable);
-        this.flexiPlusFare.click();
+        flexiPlusFare.waitUntil(visible, 6000).scrollTo().shouldBe(clickable).click();
         return this;
     }
 
     public Booking submitFlightFarePrice() {
-        this.iconSelected.waitUntil(visible, 6000);
-        this.btnContinue.waitUntil(visible, 6000);
-        this.btnContinue.click();
+        iconSelected.waitUntil(visible, 6000);
+        btnContinue.waitUntil(visible, 6000).click();
         return this;
     }
 
     public Booking selectSeats() throws InterruptedException {
         url().equals(bookingSeatsUrl);
-        if (this.popupReservedSeatsChildrenUnder12.isDisplayed()) {
-            this.btnOkIgotIt.click();
+        if (popupReservedSeatsChildrenUnder12.isDisplayed()) {
+            btnOkIgotIt.click();
         }
-        this.seatMap.waitUntil(visible, 6000);
-        this.chooseFirstAdultStandardSeat.waitUntil(visible, 6000);
-        this.chooseFirstAdultStandardSeat.click();
-        this.chooseFirstAdultStandardSeat.isSelected();
-        this.chooseSecondAdultStandardSeat.waitUntil(visible, 6000);
-        this.chooseSecondAdultStandardSeat.click();
-        this.chooseSecondAdultStandardSeat.isSelected();
-        this.chooseChildStandardSeat.waitUntil(visible, 6000);
-        this.chooseChildStandardSeat.click();
-        this.chooseChildStandardSeat.isSelected();
-        this.btnSubmitSeats.waitUntil(visible, 6000);
-        this.btnSubmitSeats.click();
+        seatMap.waitUntil(visible, 6000);
+
+        chooseFirstAdultStandardSeat.waitUntil(clickable, 6000).click();
+        chooseFirstAdultStandardSeat.isSelected();
+
+        chooseSecondAdultStandardSeat.waitUntil(clickable, 6000).click();
+        chooseSecondAdultStandardSeat.isSelected();
+
+        chooseChildStandardSeat.waitUntil(clickable, 6000).click();
+        chooseChildStandardSeat.isSelected();
+        btnSubmitSeats.waitUntil(visible, 6000).click();
         return this;
     }
 
     public Booking submitSeats() {
-        this.tblComfirmSeats.waitUntil(visible, 6000);
-        this.btnSubmitSeats.waitUntil(visible, 6000);
-        this.btnSubmitSeats.click();
+        tblComfirmSeats.waitUntil(visible, 6000);
+        btnSubmitSeats.waitUntil(visible, 6000).click();
         return this;
     }
 
     public Booking checkout() {
         url().equals(bookingExtrasUrl);
-        this.btnCheckout.waitUntil(visible, 6000);
-        this.btnCheckout.click();
+        btnCheckout.waitUntil(visible, 6000).click();
         return this;
     }
 

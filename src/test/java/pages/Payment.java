@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.WebDriverRunner.url;
-import static jdk.nashorn.internal.objects.NativeString.substring;
 import static jdk.nashorn.internal.objects.NativeString.trim;
 
 public class Payment {
@@ -66,118 +65,116 @@ public class Payment {
 
     public Payment login() {
         url().equals(paymentURL);
-        this.blockLoginRegister.waitUntil(visible, 6000);
-        this.btnLogin.waitUntil(visible, 6000);
-        this.btnLogin.click();
-        this.popupSignupLogin.waitUntil(visible, 6000);
-        this.inputEmail.waitUntil(clickable, 6000);
-        this.inputEmail.click();
-        this.inputEmail.clear();
-        this.inputEmail.sendKeys(email);
-        this.inputPassword.click();
-        this.inputPassword.clear();
-        this.inputPassword.sendKeys(password);
-        this.btnSubmitLogin.waitUntil(clickable, 6000);
-        this.btnSubmitLogin.shouldBe(clickable);
-        this.btnSubmitLogin.click();
+        blockLoginRegister.waitUntil(visible, 6000);
+        btnLogin.waitUntil(visible, 6000).click();
+        popupSignupLogin.waitUntil(visible, 6000);
+        inputEmail.waitUntil(clickable, 6000).click();
+        inputEmail.clear();
+        inputEmail.sendKeys(email);
+        inputPassword.waitUntil(clickable, 6000).click();
+        inputPassword.clear();
+        inputPassword.sendKeys(password);
+        btnSubmitLogin.waitUntil(clickable, 6000);
+        btnSubmitLogin.shouldBe(clickable);
+        btnSubmitLogin.click();
         return this;
     }
 
     public Payment enterFirstAdultPassengerData() {
-        this.formPassengersDetails.waitUntil(visible, 6000);
-        this.inputFirstAdultPassengerName.waitUntil(visible, 6000);
-        this.inputFirstAdultPassengerName.click();
-        this.inputFirstAdultPassengerName.sendKeys(Keys.ARROW_DOWN);
-        this.inputFirstAdultPassengerName.pressEnter();
+        formPassengersDetails.waitUntil(visible, 6000);
+        inputFirstAdultPassengerName.waitUntil(visible, 6000);
+        inputFirstAdultPassengerName.click();
+        inputFirstAdultPassengerName.sendKeys(Keys.ARROW_DOWN);
+        inputFirstAdultPassengerName.pressEnter();
         return this;
     }
 
     public Payment enterSecondAdultPassengerData() {
-        this.inputSecondAdultPassengerName.waitUntil(clickable, 6000);
-        this.inputSecondAdultPassengerName.click();
-        this.inputSecondAdultPassengerName.pressEnter();
+        inputSecondAdultPassengerName.waitUntil(clickable, 6000);
+        inputSecondAdultPassengerName.click();
+        inputSecondAdultPassengerName.pressEnter();
         return this;
     }
 
     public Payment enterChildPassengerData() {
-        this.inputChildPassengerName.waitUntil(clickable, 6000);
-        this.inputChildPassengerName.click();
-        this.inputChildPassengerName.pressEnter();
+        inputChildPassengerName.waitUntil(clickable, 6000);
+        inputChildPassengerName.click();
+        inputChildPassengerName.pressEnter();
         return this;
 
     }
 
     public Payment enterCardDetails(String cardNumber, String validityDate, String CVV) {
-        this.titlePaymentMethod.isDisplayed();
-        this.titlePaymentMethod.scrollTo();
+        titlePaymentMethod.isDisplayed();
+        titlePaymentMethod.scrollTo();
 
-        this.inputCardNumber.isDisplayed();
-        this.inputCardNumber.click();
-        this.inputCardNumber.clear();
-        this.inputCardNumber.sendKeys(trim(cardNumber.substring(0, cardNumber.length() - 15)));
-        this.inputCardNumber.sendKeys(trim(cardNumber.substring(5, cardNumber.length() - 10)));
-        this.inputCardNumber.sendKeys(trim(cardNumber.substring(10, cardNumber.length() - 5)));
-        this.inputCardNumber.sendKeys(trim(cardNumber.substring(cardNumber.length() - 5)));
+        inputCardNumber.isDisplayed();
+        inputCardNumber.click();
+        inputCardNumber.clear();
+        inputCardNumber.sendKeys(trim(cardNumber.substring(0, cardNumber.length() - 15)));
+        inputCardNumber.sendKeys(trim(cardNumber.substring(5, cardNumber.length() - 10)));
+        inputCardNumber.sendKeys(trim(cardNumber.substring(10, cardNumber.length() - 5)));
+        inputCardNumber.sendKeys(trim(cardNumber.substring(cardNumber.length() - 5)));
 
-        this.selectCardType.isDisplayed();
-        this.selectCardType.click();
-        this.selectCardType.selectOptionContainingText(cardType);
+        selectCardType.isDisplayed();
+        selectCardType.click();
+        selectCardType.selectOptionContainingText(cardType);
 
-        this.selectExpiryMonth.isDisplayed();
-        this.selectExpiryMonth.click();
-        this.selectExpiryMonth.selectOptionContainingText(validityDate.substring(0, validityDate.length() - 3));
+        selectExpiryMonth.isDisplayed();
+        selectExpiryMonth.click();
+        selectExpiryMonth.selectOptionContainingText(validityDate.substring(0, validityDate.length() - 3));
 
-        this.selectExpiryYear.isDisplayed();
-        this.selectExpiryYear.click();
-        this.selectExpiryYear.selectOptionContainingText("20"+validityDate.substring(3));
+        selectExpiryYear.isDisplayed();
+        selectExpiryYear.click();
+        selectExpiryYear.selectOptionContainingText("20"+validityDate.substring(3));
 
-        this.inputSecurityCode.isDisplayed();
-        this.inputSecurityCode.click();
-        this.inputSecurityCode.sendKeys(CVV);
+        inputSecurityCode.isDisplayed();
+        inputSecurityCode.click();
+        inputSecurityCode.sendKeys(CVV);
 
-        this.inputCardHolderName.isDisplayed();
-        this.inputCardHolderName.sendKeys(cardHolderName);
+        inputCardHolderName.isDisplayed();
+        inputCardHolderName.sendKeys(cardHolderName);
         return this;
 
     }
 
     public Payment enterAddressDetails() {
-        this.formBillingAddress.isDisplayed();
-        this.formBillingAddress.scrollTo();
+        formBillingAddress.isDisplayed();
+        formBillingAddress.scrollTo();
 
-        this.inputAddressLine1.isDisplayed();
-        this.inputAddressLine1.click();
-        this.inputAddressLine1.sendKeys(billingAddressLine1);
+        inputAddressLine1.isDisplayed();
+        inputAddressLine1.click();
+        inputAddressLine1.sendKeys(billingAddressLine1);
 
-        this.inputAddressLine2.isDisplayed();
-        this.inputAddressLine2.click();
-        this.inputAddressLine2.sendKeys(billingAddressLine2);
+        inputAddressLine2.isDisplayed();
+        inputAddressLine2.click();
+        inputAddressLine2.sendKeys(billingAddressLine2);
 
-        this.inputCity.isDisplayed();
-        this.inputCity.click();
-        this.inputCity.sendKeys(billingCity);
+        inputCity.isDisplayed();
+        inputCity.click();
+        inputCity.sendKeys(billingCity);
 
-        this.inputPostCode.isDisplayed();
-        this.inputPostCode.click();
-        this.inputPostCode.sendKeys(billingPostcode);
+        inputPostCode.isDisplayed();
+        inputPostCode.click();
+        inputPostCode.sendKeys(billingPostcode);
         return this;
 
     }
 
     public Payment pay() {
-        this.checkboxAcceptPolicy.exists();
-        this.checkboxAcceptPolicy.click();
-        this.btnPayNow.isDisplayed();
-        this.btnPayNow.click();
+        checkboxAcceptPolicy.exists();
+        checkboxAcceptPolicy.click();
+        btnPayNow.isDisplayed();
+        btnPayNow.click();
         return this;
 
     }
 
     public Payment checkMessageWithDeclinedPayment() {
-        this.titlePaymentMethod.isDisplayed();
-        this.titlePaymentMethod.scrollTo();
-        this.messagePaymentDeclinedError.waitUntil(visible, 6000);
-        this.messagePaymentDeclinedError.isDisplayed();
+        titlePaymentMethod.isDisplayed();
+        titlePaymentMethod.scrollTo();
+        messagePaymentDeclinedError.waitUntil(visible, 6000);
+        messagePaymentDeclinedError.isDisplayed();
         return this;
     }
 

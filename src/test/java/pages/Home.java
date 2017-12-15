@@ -4,16 +4,18 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
+import static com.codeborne.selenide.Condition.and;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Home {
-   String homeUrl = "https://www.ryanair.com/ie/en/";
+    Condition clickable = and("can be clicked", visible, enabled);
+
+    String homeUrl = "https://www.ryanair.com/ie/en/";
    private SelenideElement flightSearch = $("#search-container");
    private ElementsCollection banners = $$(By.cssSelector("div.homepagehero-outer-container>a>span"));
    private SelenideElement oneWayFlightSearch = $("#lbl-flight-search-type-one-way");
@@ -34,62 +36,53 @@ public class Home {
 
    private SelenideElement btnSearchFlights = $(By.cssSelector("button[ng-click='searchFlights()']"));
 
-    public Home selectOneWayTicket() {
-
-        return this;
-    }
-
     public Home selectFlightFrom(String flightFrom) {
         url().equals(homeUrl);
-        this.flightSearch.waitUntil(visible, 6000);
-        this.banners.first().shouldBe(visible);
-        this.flightSearch.scrollTo();
-        this.inputFlightFrom.clear();
-        this.inputFlightFrom.sendKeys(flightFrom);
-        this.inputFlightFrom.pressEnter();
+        flightSearch.waitUntil(visible, 6000);
+        banners.first().shouldBe(visible);
+        flightSearch.scrollTo();
+        inputFlightFrom.clear();
+        inputFlightFrom.sendKeys(flightFrom);
+        inputFlightFrom.pressEnter();
         return this;
     }
 
     public Home selectFlightTo(String flightTo) {
-        this.inputFlightTo.clear();
-        this.inputFlightTo.sendKeys(flightTo);
-        this.inputFlightTo.pressEnter();
+        inputFlightTo.clear();
+        inputFlightTo.sendKeys(flightTo);
+        inputFlightTo.pressEnter();
         return this;
     }
 
     public Home submitFlightConnection() {
-        this.btnContinue.waitUntil(visible, 6000);
-        this.btnContinue.click();
+        btnContinue.waitUntil(visible, 6000).click();
         return this;
     }
 
     public Home selectFlightOutDate(String flightYear, String flightMonth, String flightDay) {
-        this.inputFlightOutYear.waitUntil(visible, 6000);
-        this.inputFlightOutYear.click();
-        this.inputFlightOutYear.clear();
-        this.inputFlightOutYear.sendKeys(flightYear);
-        this.inputFlightOutDay.click();
-        this.inputFlightOutDay.clear();
-        this.inputFlightOutDay.sendKeys(flightDay);
-        this.inputFlightOutMonth.click();
-        this.inputFlightOutMonth.clear();
-        this.inputFlightOutMonth.sendKeys(flightMonth);
-        this.oneWayFlightSearch.click();
+        inputFlightOutYear.waitUntil(visible, 6000).click();
+        inputFlightOutYear.clear();
+        inputFlightOutYear.sendKeys(flightYear);
+        inputFlightOutDay.click();
+        inputFlightOutDay.clear();
+        inputFlightOutDay.sendKeys(flightDay);
+        inputFlightOutMonth.click();
+        inputFlightOutMonth.clear();
+        inputFlightOutMonth.sendKeys(flightMonth);
+        oneWayFlightSearch.click();
         return this;
     }
 
     public Home selectPassengers() {
-        this.dropDown.waitUntil(visible, 6000);
-        this.dropDown.click();
-        this.passengersPopup.waitUntil(visible, 6000);
-        this.plusOneAdultPassengerToOneExisting.waitUntil(visible, 6000);
-        this.plusOneAdultPassengerToOneExisting.click();
-        this.plusOneChild.click();
+        dropDown.waitUntil(visible, 6000).click();
+        passengersPopup.waitUntil(visible, 6000);
+        plusOneAdultPassengerToOneExisting.shouldBe(clickable).click();
+        plusOneChild.shouldBe(clickable).click();
         return this;
     }
 
     public Home submitFlightOptions() {
-        this.btnSearchFlights.click();
+        btnSearchFlights.shouldBe(clickable).click();
         return this;
     }
 
