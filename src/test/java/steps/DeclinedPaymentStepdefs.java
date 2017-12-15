@@ -1,27 +1,80 @@
 package steps;
 
-import cucumber.api.PendingException;
+import com.codeborne.selenide.Configuration;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.Booking;
+import pages.Home;
+import pages.Payment;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.screenshot;
 
 public class DeclinedPaymentStepdefs {
+    String homeUrl = "https://www.ryanair.com/ie/en/";
+    Home homePage;
+    Booking bookingPage;
+    Payment paymentPage;
 
-    @Given("^I make a booking from “Dublin” to “Wroclaw” on (\\d+)/(\\d+)/(\\d+) for (\\d+) adults and (\\d+) child$")
-    public void iMakeABookingFromDublinToWroclawOnForAdultsAndChild(int arg0, int arg1, int arg2, int arg3, int arg4) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+//
+//
+//    @Parameterized.Parameters
+//    public List<Object[]> data() {
+//        return Arrays.asList(new Object[1][0]);
+//    }
+//
+    @Before
+    public void setUp() throws Exception {
+        System.setProperty("selenide.browser", "Chrome");
+        System.setProperty("chromeoptions.args", "--disable-infobars");
+        Configuration.timeout = 6000;
+        open(homeUrl);
+
     }
 
-    @When("^I pay for booking with card details “(\\d+) (\\d+) (\\d+) (\\d+)”, “(\\d+)/(\\d+)” and “(\\d+)”$")
-    public void iPayForBookingWithCardDetailsAnd(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+    @Given("^I make a booking from \"([^\"]*)\" to \"([^\"]*)\" on (.*)/(.*)/(.*) for 2 adults and 1 child$")
+    public void iMakeABookingFromDublinToWroclawOnForAdultsAndChild(String flightFrom, String flightTo, String flightDay, String flightMonth, String flightYear) throws Throwable {
+        homePage = new Home();
+        bookingPage = new Booking();
+
+        homePage.selectFlightFrom(flightFrom)
+                .selectFlightTo(flightTo)
+                .submitFlightConnection()
+                .selectFlightOutDate(flightYear, flightMonth, flightDay)
+                .selectPassengers()
+                .submitFlightOptions();
+
+        bookingPage.selectFlightConnectionTime()
+                .selectFlightFlexiPlusFarePrice()
+                .submitFlightFarePrice()
+                .selectSeats()
+                .submitSeats()
+                .checkout();
+        screenshot("wow");
+
+    }
+
+    @When("^I pay for booking with card details \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void iPayForBookingWithCardDetails(String cardNumber, String validityDate, String CVV) throws Throwable {
+        paymentPage = new Payment();
+        paymentPage.login()
+                .enterFirstAdultPassengerData()
+                .enterSecondAdultPassengerData()
+                .enterChildPassengerData()
+                .enterCardDetails(cardNumber, validityDate, CVV)
+                .enterAddressDetails()
+                .pay();
     }
 
     @Then("^I should get payment declined message$")
     public void iShouldGetPaymentDeclinedMessage() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        paymentPage = new Payment();
+        paymentPage.checkMessageWithDeclinedPayment();
     }
+
+
 }

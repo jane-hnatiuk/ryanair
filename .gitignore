@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+target/
+build/
+
+# IntelliJ project files
+.idea
+*.iml
+
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+/src/main/java/GetDate.java
+src/test/java/LoginRyanair.java
+Jenkinsfile
