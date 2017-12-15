@@ -39,7 +39,8 @@ pipeline {
                         keepAll              : true,
                         reportDir            : 'allure-report',
                         reportFiles          : 'index.html',
-                        reportName           : 'Allure Report'
+                        reportName           : 'Allure Report',
+                        reportTitles         : ''
                 ])
             }
         }
