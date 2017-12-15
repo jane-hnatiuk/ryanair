@@ -56,10 +56,13 @@ public class Payment {
     private SelenideElement inputCity = $("#billingAddressCity");
     private SelenideElement inputPostCode = $("#billingAddressPostcode");
 
-    private SelenideElement checkboxAcceptPolicy = $(By.cssSelector("input[name='acceptPolicy']"));
-    private SelenideElement btnPayNow = $(By.cssSelector("button.core-btn-primary.core-btn-medium"));
+    private SelenideElement checkboxAcceptPolicy = $(By.cssSelector("#checkout > div > form > div.main-area > div.core-card.available-step.after-pax-validation-step > div.body > div.cta > div > label > span"));
+    private SelenideElement btnPayNow = $(By.cssSelector("button[translate='common.components.payment_forms.pay_now']"));
 
     private SelenideElement messagePaymentDeclinedError = $(By.cssSelector("prompt.error.prompt-text[text='common.components.payment_forms.error_explain_declined']"));
+    private SelenideElement titleErrorMessage = $(By.cssSelector("div.info-title"));
+    String textMessagePaymentDeclinedError = "As your payment was not authorised we could not complete your reservation. Please ensure that the information was correct or use a new payment to try again";
+    String textTitleErrorMessage = "Oh. There was a problem";
 
 
 
@@ -105,56 +108,49 @@ public class Payment {
     }
 
     public Payment enterCardDetails(String cardNumber, String validityDate, String CVV) {
-        titlePaymentMethod.isDisplayed();
-        titlePaymentMethod.scrollTo();
+        titlePaymentMethod.waitUntil(visible, 6000).scrollTo();
 
-        inputCardNumber.isDisplayed();
-        inputCardNumber.click();
+        inputCardNumber.waitUntil(clickable, 6000).click();
         inputCardNumber.clear();
         inputCardNumber.sendKeys(trim(cardNumber.substring(0, cardNumber.length() - 15)));
         inputCardNumber.sendKeys(trim(cardNumber.substring(5, cardNumber.length() - 10)));
         inputCardNumber.sendKeys(trim(cardNumber.substring(10, cardNumber.length() - 5)));
         inputCardNumber.sendKeys(trim(cardNumber.substring(cardNumber.length() - 5)));
 
-        selectCardType.isDisplayed();
-        selectCardType.click();
+        selectCardType.waitUntil(clickable, 6000).click();
         selectCardType.selectOptionContainingText(cardType);
 
-        selectExpiryMonth.isDisplayed();
-        selectExpiryMonth.click();
+        selectExpiryMonth.waitUntil(clickable, 6000).click();
         selectExpiryMonth.selectOptionContainingText(validityDate.substring(0, validityDate.length() - 3));
 
-        selectExpiryYear.isDisplayed();
-        selectExpiryYear.click();
+        selectExpiryYear.waitUntil(clickable, 6000).click();
         selectExpiryYear.selectOptionContainingText("20"+validityDate.substring(3));
 
-        inputSecurityCode.isDisplayed();
-        inputSecurityCode.click();
+        inputSecurityCode.waitUntil(clickable, 6000).click();
         inputSecurityCode.sendKeys(CVV);
 
-        inputCardHolderName.isDisplayed();
+        inputCardHolderName.waitUntil(clickable, 6000).click();
         inputCardHolderName.sendKeys(cardHolderName);
         return this;
 
     }
 
     public Payment enterAddressDetails() {
-        formBillingAddress.isDisplayed();
-        formBillingAddress.scrollTo();
+        formBillingAddress.waitUntil(visible, 6000).scrollTo();
 
-        inputAddressLine1.isDisplayed();
-        inputAddressLine1.click();
+        inputAddressLine1.waitUntil(clickable, 6000).click();
+        inputAddressLine1.clear();
         inputAddressLine1.sendKeys(billingAddressLine1);
 
-        inputAddressLine2.isDisplayed();
-        inputAddressLine2.click();
+        inputAddressLine2.waitUntil(clickable, 6000).click();
+        inputAddressLine2.clear();
         inputAddressLine2.sendKeys(billingAddressLine2);
 
-        inputCity.isDisplayed();
-        inputCity.click();
+        inputCity.waitUntil(clickable, 6000).click();
+        inputCity.clear();
         inputCity.sendKeys(billingCity);
 
-        inputPostCode.isDisplayed();
+        inputPostCode.waitUntil(clickable, 6000).click();
         inputPostCode.click();
         inputPostCode.sendKeys(billingPostcode);
         return this;
@@ -162,19 +158,16 @@ public class Payment {
     }
 
     public Payment pay() {
-        checkboxAcceptPolicy.exists();
-        checkboxAcceptPolicy.click();
-        btnPayNow.isDisplayed();
-        btnPayNow.click();
+        checkboxAcceptPolicy.waitUntil(clickable, 6000).click();
+        btnPayNow.waitUntil(clickable, 6000).click();
         return this;
 
     }
 
     public Payment checkMessageWithDeclinedPayment() {
-        titlePaymentMethod.isDisplayed();
-        titlePaymentMethod.scrollTo();
-        messagePaymentDeclinedError.waitUntil(visible, 6000);
-        messagePaymentDeclinedError.isDisplayed();
+        titlePaymentMethod.waitUntil(visible, 6000).scrollTo();
+        titleErrorMessage.waitUntil(visible, 6000).shouldHave(text(textTitleErrorMessage));
+        messagePaymentDeclinedError.waitUntil(visible, 6000).shouldHave(text(textMessagePaymentDeclinedError));
         return this;
     }
 

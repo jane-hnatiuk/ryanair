@@ -9,8 +9,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <selenium.version>3.6.0</selenium.version>
+        <selenide.version>4.8</selenide.version>
+        <junit.version>5.0.2</junit.version>
+        <slf4j.version>1.7.25</slf4j.version>
+
         <aspectj.version>1.8.10</aspectj.version>
         <allure.version>1.4.23</allure.version>
+
     </properties>
 
 
@@ -19,56 +25,34 @@
     <dependencies>
 
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-junit-adaptor</artifactId>
-            <version>${allure.version}</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${selenium.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>4.8</version>
+            <version>${selenide.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
-            <version>2.0-BETA21</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.6.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.github.webdriverextensions/webdriverextensions -->
-        <!--<dependency>-->
-            <!--<groupId>com.github.webdriverextensions</groupId>-->
-            <!--<artifactId>webdriverextensions</artifactId>-->
-            <!--<version>3.6.0</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.6.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -170,6 +154,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
+                        <environmentVariables>
+                            <jenkins.buildUrl>${BUILD_URL}</jenkins.buildUrl>
+                        </environmentVariables>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.8.9/aspectjweaver-1.8.9.jar
@@ -195,6 +182,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+                    <stopKey/>
+                    <stopPort/>
                 </configuration>
             </plugin>
         </plugins>
@@ -210,6 +199,4 @@
             </plugin>
         </plugins>
     </reporting>
-
-
 </project>
