@@ -1,88 +1,74 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.and;
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Home {
     Condition clickable = and("can be clicked", visible, enabled);
 
-    String homeUrl = "https://www.ryanair.com/ie/en/";
    private SelenideElement flightSearch = $("#search-container");
-   private ElementsCollection banners = $$(By.cssSelector("div.homepagehero-outer-container>a>span"));
+   private SelenideElement firstBanner = $$("div.homepagehero-outer-container>a>span").first();
    private SelenideElement oneWayFlightSearch = $("#lbl-flight-search-type-one-way");
-   private SelenideElement btnContinue = $(By.cssSelector("button[aria-hidden='false']"));
+   private SelenideElement btnContinue = $("button[aria-hidden='false']");
 
-   private SelenideElement inputFlightFrom = $(By.cssSelector("input[aria-labelledby='label-airport-selector-from']"));
-   private SelenideElement inputFlightTo = $(By.cssSelector("input[aria-labelledby='label-airport-selector-to']"));
+   private SelenideElement inputFlightFrom = $("input[aria-labelledby='label-airport-selector-from']");
+   private SelenideElement inputFlightTo = $("input[aria-labelledby='label-airport-selector-to']");
 
-   private SelenideElement inputFlightOutYear = $(By.cssSelector("input.yyyy[aria-label='Fly out: - YYYY']"));
-   private SelenideElement inputFlightOutMonth = $(By.cssSelector("input.mm[aria-label='Fly out: - MM']"));
-   private SelenideElement inputFlightOutDay = $(By.cssSelector("input.dd[aria-label='Fly out: - DD']"));
+   private SelenideElement inputFlightOutYear = $("input.yyyy[aria-label='Fly out: - YYYY']");
+   private SelenideElement inputFlightOutMonth = $("input.mm[aria-label='Fly out: - MM']");
+   private SelenideElement inputFlightOutDay = $("input.dd[aria-label='Fly out: - DD']");
 
-   private SelenideElement dropDown = $(By.cssSelector("div.dropdown-handle"));
-   private SelenideElement passengersPopup = $(By.cssSelector("div.popup-passenger-input.opened"));
-   private SelenideElement plusOneAdultPassengerToOneExisting = $(By.cssSelector("div.popup-passenger-input.opened > div > div > div.content > popup-content > div:nth-child(6) > div > div.details-controls > core-inc-dec > button.core-btn.inc.core-btn-wrap"));
+   private SelenideElement dropDown = $("div.dropdown-handle");
+   private SelenideElement passengersPopup = $("div.popup-passenger-input.opened");
+   private SelenideElement plusOneAdultPassengerToOneExisting = $$("button.core-btn.inc.core-btn-wrap").first();
 
-   private SelenideElement plusOneChild = $(By.cssSelector("div.popup-passenger-input.opened > div > div > div.content > popup-content > div:nth-child(8) > div > div.details-controls > core-inc-dec > button.core-btn.inc.core-btn-wrap"));
+   private SelenideElement plusOneChild = $$("button.core-btn.inc.core-btn-wrap").get(2);
 
-   private SelenideElement btnSearchFlights = $(By.cssSelector("button[ng-click='searchFlights()']"));
+   private SelenideElement btnSearchFlights = $("button[ng-click='searchFlights()']");
 
     public Home selectFlightFrom(String flightFrom) {
-        url().equals(homeUrl);
-        flightSearch.waitUntil(visible, 6000);
-        banners.first().shouldBe(visible);
+        flightSearch.shouldBe(visible);
+        firstBanner.shouldBe(visible);
         flightSearch.scrollTo();
-        inputFlightFrom.clear();
-        inputFlightFrom.sendKeys(flightFrom);
+        inputFlightFrom.setValue(flightFrom);
         inputFlightFrom.pressEnter();
         return this;
     }
 
     public Home selectFlightTo(String flightTo) {
-        inputFlightTo.clear();
-        inputFlightTo.sendKeys(flightTo);
+        inputFlightTo.setValue(flightTo);
         inputFlightTo.pressEnter();
         return this;
     }
 
     public Home submitFlightConnection() {
-        btnContinue.waitUntil(visible, 6000).click();
+        btnContinue.shouldBe(visible).click();
         return this;
     }
 
     public Home selectFlightOutDate(String flightYear, String flightMonth, String flightDay) {
-        inputFlightOutYear.waitUntil(visible, 6000).click();
-        inputFlightOutYear.clear();
-        inputFlightOutYear.sendKeys(flightYear);
-        inputFlightOutDay.click();
-        inputFlightOutDay.clear();
-        inputFlightOutDay.sendKeys(flightDay);
-        inputFlightOutMonth.click();
-        inputFlightOutMonth.clear();
-        inputFlightOutMonth.sendKeys(flightMonth);
+        inputFlightOutYear.shouldBe(visible).click();
+        inputFlightOutYear.setValue(flightYear);
+        inputFlightOutDay.setValue(flightDay);
+        inputFlightOutMonth.setValue(flightMonth);
         oneWayFlightSearch.click();
         return this;
     }
 
     public Home selectPassengers() {
-        dropDown.waitUntil(visible, 6000).click();
-        passengersPopup.waitUntil(visible, 6000);
+        dropDown.shouldBe(clickable).click();
+        passengersPopup.waitUntil(visible, 6000).shouldBe(visible);
         plusOneAdultPassengerToOneExisting.shouldBe(clickable).click();
         plusOneChild.shouldBe(clickable).click();
         return this;
     }
 
     public Home submitFlightOptions() {
-        btnSearchFlights.shouldBe(clickable).click();
+        btnSearchFlights.waitUntil(visible, 6000).shouldBe(clickable).doubleClick();
         return this;
     }
 

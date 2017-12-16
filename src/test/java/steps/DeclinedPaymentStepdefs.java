@@ -10,7 +10,6 @@ import pages.Home;
 import pages.Payment;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.screenshot;
 
 public class DeclinedPaymentStepdefs {
     String homeUrl = "https://www.ryanair.com/ie/en/";
@@ -36,6 +35,9 @@ public class DeclinedPaymentStepdefs {
 
     }
 
+//    @Rule
+//    public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests();
+
 
     @Given("^I make a booking from \"([^\"]*)\" to \"([^\"]*)\" on (.*)/(.*)/(.*) for 2 adults and 1 child$")
     public void iMakeABookingFromDublinToWroclawOnForAdultsAndChild(String flightFrom, String flightTo, String flightDay, String flightMonth, String flightYear) throws Throwable {
@@ -55,8 +57,6 @@ public class DeclinedPaymentStepdefs {
                 .selectSeats()
                 .submitSeats()
                 .checkout();
-        screenshot("wow");
-
     }
 
     @When("^I pay for booking with card details \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
