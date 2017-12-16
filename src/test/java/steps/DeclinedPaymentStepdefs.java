@@ -27,12 +27,11 @@ public class DeclinedPaymentStepdefs {
 //
     @Before
     public void setUp() throws Exception {
-        System.setProperty("selenide.browser", "Chrome");
-        System.setProperty("chromeoptions.args", "--disable-infobars");
+//        System.setProperty("selenide.browser", "Chrome");
+//        System.setProperty("chromeoptions.args", "--disable-infobars");
         Configuration.timeout = 6000;
         Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);
-
     }
 
 //    @Rule
