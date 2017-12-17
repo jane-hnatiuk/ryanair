@@ -1,5 +1,4 @@
-# Created by .ignore support plugin (hsz.mobi)
-
+# Project artifacts
 target/
 build/
 
@@ -13,5 +12,3 @@ build/
 
 # Log file
 *.log
-/src/main/java/GetDate.java
-src/test/java/LoginRyanair.java

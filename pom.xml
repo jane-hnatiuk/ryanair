@@ -17,14 +17,11 @@
         <junit.platform.version>1.0.1</junit.platform.version>
         <aspectj.version>1.8.11</aspectj.version>
         <allure.maven.version>2.9</allure.maven.version>
-        <unit-platform.version>1.0.2</unit-platform.version>
         <slf4j.version>1.7.25</slf4j.version>
         <cucumber.version>1.2.5</cucumber.version>
-
     </properties>
 
-
-
+    <!--Selenide - Selenium Wrapper-->
     <dependencies>
         <dependency>
             <groupId>com.codeborne</groupId>
@@ -32,61 +29,73 @@
             <version>${selenide.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!--Cucumber BDD-->
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging-api</artifactId>
-            <version>1.1</version>
-        </dependency>
+
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>gherkin</artifactId>
             <version>2.12.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.3.2</version>
-        </dependency>
+
+        <!--JUnit Runner-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.api.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!--Logging-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
         </dependency>
 
         <!--To avoid compiler warnings about @API annotations in JUnit code-->
@@ -96,17 +105,19 @@
             <version>1.0.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!--Allure Reporting-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>2.0-BETA21</version>
         </dependency>
 
-            <dependency>
-                <groupId>ru.yandex.qatools.allure</groupId>
-                <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-                <version>1.6.2</version>
-            </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>

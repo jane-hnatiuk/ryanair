@@ -17,26 +17,12 @@ public class DeclinedPaymentStepdefs {
     Booking bookingPage;
     Payment paymentPage;
 
-
-//
-//
-//    @Parameterized.Parameters
-//    public List<Object[]> data() {
-//        return Arrays.asList(new Object[1][0]);
-//    }
-//
     @Before
     public void setUp() throws Exception {
-//        System.setProperty("selenide.browser", "Chrome");
-//        System.setProperty("chromeoptions.args", "--disable-infobars");
         Configuration.timeout = 6000;
         Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);
     }
-
-//    @Rule
-//    public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests();
-
 
     @Given("^I make a booking from \"([^\"]*)\" to \"([^\"]*)\" on (.*)/(.*)/(.*) for 2 adults and 1 child$")
     public void iMakeABookingFromDublinToWroclawOnForAdultsAndChild(String flightFrom, String flightTo, String flightDay, String flightMonth, String flightYear) throws Throwable {
