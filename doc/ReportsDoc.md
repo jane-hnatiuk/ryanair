@@ -22,13 +22,16 @@ https://docs.qameta.io/allure/latest/
 https://docs.qameta.io/allure/latest/#_jenkins
 
 - To generate the report (allure-report folder) locally run: 
-allure generate --clean
+
+```allure generate --clean```
 
   Report will generate in folder allure-report in project root
 - To generate reports with automatic opening in default browser run:
-allure serve 
+
+```allure serve```
   Report will generate in temporary folder /var/folders/*
   
 - To remove last test results run:
- rm -rf allure-results/
+
+ ```rm -rf allure-results/```
 
