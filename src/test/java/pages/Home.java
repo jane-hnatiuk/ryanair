@@ -61,14 +61,14 @@ public class Home {
 
     public Home selectPassengers() {
         dropDown.shouldBe(clickable).click();
-        passengersPopup.waitUntil(visible, 6000).shouldBe(visible);
+        passengersPopup.shouldBe(visible);
         plusOneAdultPassengerToOneExisting.shouldBe(clickable).click();
         plusOneChild.shouldBe(clickable).click();
         return this;
     }
 
     public Home submitFlightOptions() {
-        btnSearchFlights.waitUntil(visible, 6000).shouldBe(clickable).doubleClick();
+        btnSearchFlights.shouldBe(clickable).doubleClick();
         return this;
     }
 

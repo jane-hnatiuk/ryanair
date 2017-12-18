@@ -13,8 +13,8 @@ import org.junit.runner.RunWith;
                 "json:build/cucumber.json",
                 "junit:build/cucumber.xml"},
         features = "classpath:features",
-        glue =  "classpath:steps")
-//        tags = "~@ignore")
+        glue =  "classpath:steps",
+        tags = "~@ignore")
 
 public class DeclinedPaymentTest {
 
