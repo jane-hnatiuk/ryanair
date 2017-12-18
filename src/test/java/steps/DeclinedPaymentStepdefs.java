@@ -27,7 +27,7 @@ public class DeclinedPaymentStepdefs {
     @Before
     public void setUp() throws Exception {
         Configuration.timeout = 6000;
-        Configuration.reportsFolder = "allure-report/data/attachments";
+        Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);
     }
 
