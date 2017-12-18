@@ -1,6 +1,8 @@
 # Project artifacts
 target/
 build/
+allure-results
+allure-report
 
 # IntelliJ project files
 .idea

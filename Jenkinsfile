@@ -31,7 +31,7 @@ pipeline {
                     jdk              : '',
                     properties       : [],
                     reportBuildPolicy: 'ALWAYS',
-                    results          : [[path: 'target/surefire-reports']],
+                    results          : [[path: 'allure-results']],
             ])
             publishHTML([
                     allowMissing         : false,
