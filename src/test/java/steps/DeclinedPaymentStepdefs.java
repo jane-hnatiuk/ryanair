@@ -69,45 +69,6 @@ public class DeclinedPaymentStepdefs {
         paymentPage.checkMessageWithDeclinedPayment();
     }
 
-//    @After
-//    private void makeScreenshot(Scenario scenario) {
-//        if (scenario.isFailed()) {
-//            byte[] screenshot = ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
-//            scenario.embed(screenshot, "image/png");
-//        }
-//    }
-//
-//    @Attachment(type = "image/png")
-//    public byte[] makeScreenshotOnFailure() {
-//        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
-//    }
-
-//    @Rule
-//    public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests().succeededTests();
-
-
-//    @Rule
-//    public TestWatcher screenshotOnFailure = new TestWatcher() {
-//        @Override
-//        protected void failed(Throwable e, Description description) {
-//            makeScreenshotOnFailure();
-//        }
-//
-
-
-
-//    @After
-//    private void addScreenshotToErrorTest() throws IOException {
-//    File lastSelenideScreenshot = Screenshots.getLastScreenshot();
-//    if (lastSelenideScreenshot != null) {
-//            screenshot(Files.toByteArray(lastSelenideScreenshot));
-//        }
-//    }
-//
-//    @Attachment(type = "image/png")
-//    public static byte[] screenshot(byte[] dataForScreenshot) throws IOException {
-//        return dataForScreenshot;
-//    }
 
     @After
     public void tearDown() throws IOException {
