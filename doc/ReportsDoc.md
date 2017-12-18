@@ -6,7 +6,7 @@ Allure reports are stored in allure-report folder.
 Screenshots are stored in target/surefire-reports folder.
  
 Additionally screenshots are displayed on Allure Reports for failed test case:
- Allure > Suites > Failed <Name of Scenario> screenshot > click.
+ Allure > Suites > Scenario> click > Failed <Name of Scenario > screenshot > click.
  
 Example of failed test reporting hosted here:
 https://jane-hnatiuk.github.io/
