@@ -33,15 +33,6 @@ pipeline {
                     reportBuildPolicy: 'ALWAYS',
                     results          : [[path: 'allure-results']],
             ])
-            publishHTML([
-                    allowMissing         : false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll              : true,
-                    reportDir            : 'target/cucumber',
-                    reportFiles          : 'index.html',
-                    reportName           : 'Cucumber Report',
-                    reportTitles         : ''
-            ])
         }
     }
 }
