@@ -12,6 +12,7 @@ pipeline {
             steps {
                 sh 'rm -rf target/'
                 sh 'rm -rf allure-report/'
+                sh 'rm -rf allure-results/'
             }
         }
 
@@ -33,6 +34,14 @@ pipeline {
                     reportBuildPolicy: 'ALWAYS',
                     results          : [[path: 'allure-results']]
             ])
+        }
+    }
+    finnally {
+        stage("Log reports"){
+            junit 'build/test-results/**/*.xml'
+            artifacts =
+                 'build/reports/**/*,build/test-results/**/*,logs/**/*'
+            archiveArtifacts artifacts: artifacts
         }
     }
 }
