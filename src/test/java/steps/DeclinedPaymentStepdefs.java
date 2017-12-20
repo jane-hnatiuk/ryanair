@@ -26,9 +26,9 @@ public class DeclinedPaymentStepdefs {
 
     @Before
     public void setUp() throws Exception {
+        Configuration.browserSize = "1024x768";
         Configuration.timeout = 6000;
-        System.setProperty("java.awt.headless", "false");
-        System.out.println(java.awt.GraphicsEnvironment.isHeadless());        Configuration.reportsFolder = "target/surefire-reports";
+        Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);
     }
 
