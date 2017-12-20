@@ -27,7 +27,8 @@ public class DeclinedPaymentStepdefs {
     @Before
     public void setUp() throws Exception {
         Configuration.timeout = 6000;
-        Configuration.reportsFolder = "target/surefire-reports";
+        System.setProperty("java.awt.headless", "false");
+        System.out.println(java.awt.GraphicsEnvironment.isHeadless());        Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);
     }
 
@@ -80,6 +81,5 @@ public class DeclinedPaymentStepdefs {
         File screenshot = Screenshots.takeScreenShotAsFile();
         return Files.toByteArray(screenshot);
     }
-
 
 }
