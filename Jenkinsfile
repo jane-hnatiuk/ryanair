@@ -36,12 +36,4 @@ pipeline {
             ])
         }
     }
-    finnally {
-        stage("Log reports"){
-            junit 'build/test-results/**/*.xml'
-            artifacts =
-                 'build/reports/**/*,build/test-results/**/*,logs/**/*'
-            archiveArtifacts artifacts: artifacts
-        }
-    }
 }
