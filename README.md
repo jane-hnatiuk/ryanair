@@ -1,6 +1,6 @@
 # Test for booking up to a declined payment 
 
-This test automation framework uses Java, Maven and JUnit5 and contains Selenide API, Cucumber JVM BDD with Allure reports.
+This test automation framework uses Java, Maven and JUnit and contains Selenide API, Cucumber JVM BDD with Allure reports.
 
 **Selenide** is a framework for test automation powered by Selenium WebDriver (Selenium wrapper)that brings the following advantages:
 - Concise fluent API for tests Ajax support for stable tests

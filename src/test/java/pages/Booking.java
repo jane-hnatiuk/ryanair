@@ -34,7 +34,7 @@ public class Booking {
     private SelenideElement btnOkIgotIt = $("button.core-btn-primary.same-seats.ng-click-active");
 
     String bookingExtrasUrl = "https://www.ryanair.com/ie/en/booking/extras";
-    private SelenideElement btnCheckout = $("button.core-btn-primary.core-btn-block.core-btn-medium.btn-text");
+    private SelenideElement btnCheckout = $("button[data-ref='header-checkout-btn']");
 
 
     public Booking selectFlightConnectionTime(){
@@ -69,12 +69,12 @@ public class Booking {
 
     public Booking submitSeats() {
         tblComfirmSeats.shouldBe(visible);
-        btnSubmitSeats.shouldBe(visible).click();
+        btnSubmitSeats.shouldBe(clickable).click();
         return this;
     }
 
     public Booking checkout() {
-        btnCheckout.shouldBe(visible).click();
+        btnCheckout.shouldBe(clickable).hover().click();
         return this;
     }
 

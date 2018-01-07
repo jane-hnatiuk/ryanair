@@ -26,7 +26,7 @@ public class DeclinedPaymentStepdefs {
 
     @Before
     public void setUp() throws Exception {
-        Configuration.browserSize = "1024x768";
+//        Configuration.browserSize = "1024x768";
         Configuration.timeout = 6000;
         Configuration.reportsFolder = "target/surefire-reports";
         open(homeUrl);

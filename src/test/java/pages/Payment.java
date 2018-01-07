@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.WebDriverRunner.url;
 import static jdk.nashorn.internal.objects.NativeString.trim;
 
 public class Payment {
@@ -24,7 +25,7 @@ public class Payment {
     String billingPostcode = "12345";
 
 
-    private SelenideElement blockLoginRegister = $("div.login-register");
+    private SelenideElement blockLoginRegister = $("div.checkout-compact");
     private SelenideElement btnLogin = $("button.core-btn-secondary");
     private SelenideElement popupSignupLogin = $("signup-home-form");
     private SelenideElement inputEmail = $("input[type='email']");
@@ -62,6 +63,7 @@ public class Payment {
 
 
     public Payment login() {
+        System.out.println(url());
         blockLoginRegister.shouldBe(visible);
         btnLogin.shouldBe(visible).click();
         popupSignupLogin.shouldBe(visible);
@@ -101,6 +103,8 @@ public class Payment {
         String second4DigitsCardNumber = trim(cardNumber.substring(5, cardNumber.length() - 10));
         String third4DigitsCardNumber = trim(cardNumber.substring(10, cardNumber.length() - 5));
         String fourth4DigitsCardNumber = (trim(cardNumber.substring(cardNumber.length() - 5)));
+        String textValidityMonth = validityDate.substring(0, validityDate.length() - 3);
+        String textValidityYear = "20"+validityDate.substring(3);
 
         titlePaymentMethod.shouldBe(visible).scrollTo();
 
@@ -115,10 +119,10 @@ public class Payment {
         selectCardType.selectOptionContainingText(cardType);
 
         selectExpiryMonth.shouldBe(clickable).click();
-        selectExpiryMonth.selectOptionContainingText(validityDate.substring(0, validityDate.length() - 3));
+        selectExpiryMonth.selectOptionContainingText(textValidityMonth);
 
         selectExpiryYear.shouldBe(clickable).click();
-        selectExpiryYear.selectOptionContainingText("20"+validityDate.substring(3));
+        selectExpiryYear.selectOptionContainingText(textValidityYear);
 
         inputSecurityCode.shouldBe(clickable).click();
         inputSecurityCode.setValue(CVV);

@@ -17,5 +17,4 @@ import org.junit.runner.RunWith;
         tags = "~@ignore")
 
 public class DeclinedPaymentTest {
-
 }
